@@ -38,3 +38,5 @@ next-env.d.ts
 # temporary artifacts
 qa-*.png
 .playwright-mcp/
+
+.vercel
