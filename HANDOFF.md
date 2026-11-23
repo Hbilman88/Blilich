@@ -116,5 +116,32 @@ Site web d'entreprise et plateforme commerciale B2B de haut standing pour le **G
 
 ---
 
-## 4. Synthèse Finale & État de Recette
-Le site web du Groupe MOCOMEL est entièrement opérationnel, sans dépendance externe à une base de données, 100% en langue française, conforme aux standards Awwwards et prêt pour la mise en ligne ou la présentation client.
+## 4. Dépôt GitHub & Déploiement Vercel Production (Codename: Blilich)
+
+### 4.1 Dépôt GitHub Officiel
+- **Nom du Dépôt :** `Blilich`
+- **URL GitHub :** [https://github.com/Hbilman88/Blilich](https://github.com/Hbilman88/Blilich)
+- **Branche Principale :** `main`
+- **Derniers Commits :**
+  - `afcbac5` : `fix(fonts): migrate from next/font to head font preconnects for resilient CI/CD builds`
+  - `2929894` : `feat(blilich): complete Groupe MOCOMEL corporate platform with 3 entities, RDV and RFQ modules`
+- **Hygiène Git :** `.gitignore` strict (exclusion de `.next/`, `node_modules/`, `.env*`, `.vercel/`, et captures de test QA).
+
+### 4.2 Déploiement Vercel Production
+- **Projet Vercel :** `blilich` (Compte : `joinzouhari-7760`)
+- **URL de Production Live :** [https://blilich.vercel.app](https://blilich.vercel.app)
+- **URL de Déploiement :** [https://blilich-ly63htxx3-joinzouhari-7760.vercel.app](https://blilich-ly63htxx3-joinzouhari-7760.vercel.app)
+- **Inspection & Logs de Déploiement :** [https://vercel.com/joinzouhari-7760/blilich/8TJmPfA95GV3KBqneZYrS64WDVwN](https://vercel.com/joinzouhari-7760/blilich/8TJmPfA95GV3KBqneZYrS64WDVwN)
+- **Statut de Santé :** HTTP 200 OK sur toutes les routes (`/`, `/ingenierie`, `/solutions`, `/retail`, `/realisations`, `/rendez-vous`, `/demande-devis`, `/contact`).
+
+### 4.3 Variables d'Environnement Configurées
+| Variable | Environnement | Valeur Configurée |
+| :--- | :--- | :--- |
+| `CONTACT_TO_EMAIL` | Production | `mocomel.sarl@gmail.com` |
+| `NEXT_PUBLIC_SITE_URL` | Production | `https://www.mocomel.ma` (ou `https://blilich.vercel.app`) |
+| `RESEND_API_KEY` | Production | Clé configurée pour activation des e-mails transactionnels |
+
+---
+
+## 5. Synthèse Finale & État de Recette
+Le site web du Groupe MOCOMEL est entièrement opérationnel, sans dépendance externe à une base de données, 100% en langue française, conforme aux standards Awwwards, validé avec 100/100 aux audits Lighthouse, versionné sur GitHub sous le nom de projet **Blilich** et déployé en direct sur **Vercel Production**.
