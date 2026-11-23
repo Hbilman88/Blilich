@@ -7,7 +7,7 @@ import { SmoothScrollProvider } from "@/components/providers/smooth-scroll-provi
 import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
-  title: "Groupe MOCOMEL | Ingénierie Électrique HT/BT, Solutions & Retail B2B",
+  title: "Groupe MOCOMEL | Énergie HT/BT, Solutions Tertiaires & Retail B2B",
   description:
     "Leader marocain en ingénierie électrique HT/BT, postes de transformation, aménagement tertiaire et distribution de matériel électrique accrédité ONEE. Casablanca, Maroc.",
   icons: {

@@ -36,9 +36,10 @@ interface AttachedFile {
 
 const POLES = [
   {
-    id: "ingenierie-htbt",
-    slug: "ingenierie",
-    title: "Ingénierie & Postes HT/BT",
+    id: "energie-htbt",
+    slug: "energie",
+    altSlug: "ingenierie",
+    title: "MOCOMEL Énergie · Postes HT/BT",
     desc: "Postes de transformation MT/BT, cellules HTA, réseaux aériens/souterrains et homologation ONEE.",
     icon: HardHat,
     color: "#007A63",
@@ -46,7 +47,8 @@ const POLES = [
   },
   {
     id: "industrie-automation",
-    slug: "ingenierie",
+    slug: "energie",
+    altSlug: "ingenierie",
     title: "Électricité Industrielle & Automation",
     desc: "TGBT, armoires d'automatisme, compensation d'énergie réactive, variateurs et maintenance préventive.",
     icon: Cpu,
@@ -135,7 +137,9 @@ function RendezVousContent() {
 
   useEffect(() => {
     if (poleParam) {
-      const match = POLES.find((p) => p.slug === poleParam || p.id === poleParam);
+      const match = POLES.find(
+        (p) => p.slug === poleParam || (p as any).altSlug === poleParam || p.id === poleParam
+      );
       if (match) setSelectedPole(match.id);
     }
   }, [poleParam]);
@@ -312,7 +316,7 @@ function RendezVousContent() {
 
               <div className="pt-4 border-t border-border space-y-2.5">
                 <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
-                  Contact Direct Ingénierie
+                  Contact Direct Pôle Énergie
                 </p>
                 <a
                   href={`tel:${COMPANY_INFO.phoneStandard}`}

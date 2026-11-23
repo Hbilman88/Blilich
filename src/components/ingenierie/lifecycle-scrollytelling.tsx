@@ -233,7 +233,7 @@ export function LifecycleScrollytelling() {
                 <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between">
                   <div>
                     <span className="text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-bold block">
-                      Groupe MOCOMEL Ingénierie
+                      Groupe MOCOMEL Énergie
                     </span>
                     <p className="text-white font-heading font-bold text-lg">
                       {s.step} · {s.title}

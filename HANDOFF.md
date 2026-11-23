@@ -141,6 +141,19 @@ Site web d'entreprise et plateforme commerciale B2B de haut standing pour le **G
 | `NEXT_PUBLIC_SITE_URL` | Production | `https://www.mocomel.ma` (ou `https://blilich.vercel.app`) |
 | `RESEND_API_KEY` | Production | Clé configurée pour activation des e-mails transactionnels |
 
+### 4.4 Passe de Finition Post-Déploiement (Fixes Spécifiques)
+1. **Dédoublonnage de la Navigation & Pilule « Le groupe » :**
+   - Remplacement de la double barre par une structure de navigation unifiée : `[ Le groupe | Énergie | Solutions | Retail ]` suivi de `Réalisations` et `Contact`.
+   - Zéro répétition d'intitulés d'entités côte à côte.
+2. **Requalification en « MOCOMEL Énergie » :**
+   - Mise à jour de la base de connaissances (`mocomel_corporate_knowledge_base.md` et `docs-and-assets/mocomel_knowledge_base.md`).
+   - Requalification intégrale des libellés, titres de pages, badges, fiches et métadonnées en **MOCOMEL Énergie**.
+   - Nouvelle route canonique `/energie` et redirection 301 automatique `/ingenierie -> /energie` dans `next.config.ts`.
+3. **Visibilité Garantie de la Section « Trois Pôles Complémentaires » :**
+   - Élimination des états de départ invisibles à `opacity: 0` via `gsap.from`.
+   - Rendu CSS direct à `opacity: 1`, révélation GSAP non-bloquante avec `clearProps: "all"` et minuterie de sécurisation assurant une visibilité à 100% même en cas de variation de chargement réseau/vidéo.
+   - Validation locale Playwright : 3 cartes actives, interactives et affichées avec `opacity: 1`.
+
 ---
 
 ## 5. Synthèse Finale & État de Recette

@@ -85,9 +85,9 @@ export const COMPANY_INFO = {
 
 export const ENTITIES = [
   {
-    id: "ingenierie",
+    id: "energie",
     number: "01",
-    name: "MOCOMEL Ingénierie",
+    name: "MOCOMEL Énergie",
     title: "Ingénierie Électrique HT/BT & Postes",
     scope: "Études techniques, postes de transformation HTA/BT, armoires industrielles TGBT, automatismes et maintenance préventive.",
     themeColor: "#007A63",
@@ -95,8 +95,8 @@ export const ENTITIES = [
     tintColor: "#ECFDF5",
     logo: "/logos/logo-mocomel.png",
     logoWhite: "/logos/logo-mocomel-white.png",
-    href: "/ingenierie",
-    ctaLabel: "Explorer le Pôle Ingénierie",
+    href: "/energie",
+    ctaLabel: "Explorer le Pôle Énergie",
     badge: "Entité Mère & Cœur Métier",
   },
   {

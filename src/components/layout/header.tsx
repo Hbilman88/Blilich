@@ -13,7 +13,7 @@ import {
   Zap,
   ShieldCheck,
   ShoppingBag,
-  ChevronDown,
+  Building2,
   ArrowRight,
 } from "lucide-react";
 
@@ -41,54 +41,42 @@ export function Header() {
   // Determine current active entity and corresponding logo
   const isSolutions = pathname.startsWith("/solutions");
   const isRetail = pathname.startsWith("/retail");
-  const isIngenierie = pathname.startsWith("/ingenierie");
+  const isEnergie = pathname.startsWith("/energie") || pathname.startsWith("/ingenierie");
   const isHome = pathname === "/";
 
-  // When at top of Home or Ingenierie (which have dark full-screen video heroes), use white logo
-  const isOverDarkHero = (isHome || isIngenierie) && !isScrolled;
+  // When at top of Home or Energie (which have dark full-screen video heroes), use white logo
+  const isOverDarkHero = (isHome || isEnergie) && !isScrolled;
 
   let logoSrc = "/logos/logo-mocomel.png";
   let entityTitle = "Groupe MOCOMEL";
-  let activePoleColor = "#007A63";
 
   if (isSolutions) {
-    logoSrc = isScrolled ? "/logos/logo-solutions.png" : "/logos/logo-solutions.png";
+    logoSrc = "/logos/logo-solutions.png";
     entityTitle = "MOCOMEL Solutions";
-    activePoleColor = "#22409A";
   } else if (isRetail) {
     logoSrc = "/logos/logo-retail.png";
     entityTitle = "MOCOMEL Retail";
-    activePoleColor = "#9B112B";
   } else {
-    // Default group / ingenierie
+    // Default group / énergie
     logoSrc = isOverDarkHero ? "/logos/logo-mocomel-white.png" : "/logos/logo-mocomel.png";
-    entityTitle = isIngenierie ? "MOCOMEL Ingénierie" : "Groupe MOCOMEL";
-    activePoleColor = "#007A63";
+    entityTitle = isEnergie ? "MOCOMEL Énergie" : "Groupe MOCOMEL";
   }
-
-  const navLinks = [
-    { href: "/ingenierie", label: "Ingénierie HT/BT", active: isIngenierie },
-    { href: "/solutions", label: "Solutions", active: isSolutions },
-    { href: "/retail", label: "Retail B2B", active: isRetail },
-    { href: "/realisations", label: "Réalisations", active: pathname === "/realisations" },
-    { href: "/contact", label: "Contact", active: pathname === "/contact" },
-  ];
 
   return (
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? "bg-white/90 dark:bg-slate-950/90 backdrop-blur-md border-b border-border py-3 shadow-sm text-foreground"
+            ? "bg-white/95 dark:bg-slate-950/95 backdrop-blur-md border-b border-border py-3 shadow-xs text-foreground"
             : isOverDarkHero
-            ? "bg-gradient-to-b from-black/80 via-black/40 to-transparent py-5 text-white"
-            : "bg-white/70 dark:bg-slate-950/70 backdrop-blur-sm border-b border-border/50 py-5 text-foreground"
+            ? "bg-gradient-to-b from-black/85 via-black/40 to-transparent py-4 text-white"
+            : "bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-b border-border/60 py-4 text-foreground"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-4">
             {/* Left: Dynamic Entity Logo */}
-            <div className="flex items-center gap-6">
+            <div className="flex items-center shrink-0">
               <Link
                 href="/"
                 className="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-primary/40 rounded-sm"
@@ -104,87 +92,120 @@ export function Header() {
                   />
                 </div>
               </Link>
+            </div>
 
-              {/* Entity Quick Switcher Pill (Desktop) */}
+            {/* Center: Unified Navigation Structure (Desktop) */}
+            <nav className="hidden lg:flex items-center gap-2">
+              {/* Entity & Group Segmented Pill */}
               <div
-                className={`hidden xl:flex items-center p-0.5 rounded-full border text-xs font-medium ${
+                className={`flex items-center p-1 rounded-full border text-xs font-medium transition-all ${
                   isOverDarkHero
                     ? "bg-white/10 border-white/20 text-white/90"
-                    : "bg-slate-100 dark:bg-slate-900 border-border text-muted-foreground"
+                    : "bg-slate-100/90 dark:bg-slate-900/90 border-border text-muted-foreground shadow-2xs"
                 }`}
               >
                 <Link
-                  href="/ingenierie"
-                  className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full transition-all ${
-                    isIngenierie
-                      ? "bg-[#007A63] text-white font-semibold shadow-sm"
-                      : "hover:text-foreground"
+                  href="/"
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-all duration-200 ${
+                    isHome
+                      ? isOverDarkHero
+                        ? "bg-white/25 text-white font-bold shadow-xs"
+                        : "bg-white dark:bg-slate-800 text-foreground font-bold shadow-xs"
+                      : isOverDarkHero
+                      ? "hover:text-white hover:bg-white/10"
+                      : "hover:text-foreground hover:bg-white/60 dark:hover:bg-slate-800/60"
                   }`}
                 >
-                  <Zap className="w-3 h-3 text-emerald-300" />
-                  <span>Ingénierie</span>
+                  <Building2 className="w-3.5 h-3.5" />
+                  <span>Le groupe</span>
                 </Link>
+
+                <Link
+                  href="/energie"
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-all duration-200 ${
+                    isEnergie
+                      ? "bg-[#007A63] text-white font-bold shadow-xs"
+                      : isOverDarkHero
+                      ? "hover:text-white hover:bg-white/10"
+                      : "hover:text-foreground hover:bg-white/60 dark:hover:bg-slate-800/60"
+                  }`}
+                >
+                  <Zap className={`w-3.5 h-3.5 ${isEnergie ? "text-emerald-200" : "text-[#007A63]"}`} />
+                  <span>Énergie</span>
+                </Link>
+
                 <Link
                   href="/solutions"
-                  className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full transition-all ${
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-all duration-200 ${
                     isSolutions
-                      ? "bg-[#22409A] text-white font-semibold shadow-sm"
-                      : "hover:text-foreground"
+                      ? "bg-[#22409A] text-white font-bold shadow-xs"
+                      : isOverDarkHero
+                      ? "hover:text-white hover:bg-white/10"
+                      : "hover:text-foreground hover:bg-white/60 dark:hover:bg-slate-800/60"
                   }`}
                 >
-                  <ShieldCheck className="w-3 h-3 text-blue-300" />
+                  <ShieldCheck className={`w-3.5 h-3.5 ${isSolutions ? "text-blue-200" : "text-[#22409A]"}`} />
                   <span>Solutions</span>
                 </Link>
+
                 <Link
                   href="/retail"
-                  className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full transition-all ${
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full transition-all duration-200 ${
                     isRetail
-                      ? "bg-[#9B112B] text-white font-semibold shadow-sm"
-                      : "hover:text-foreground"
+                      ? "bg-[#9B112B] text-white font-bold shadow-xs"
+                      : isOverDarkHero
+                      ? "hover:text-white hover:bg-white/10"
+                      : "hover:text-foreground hover:bg-white/60 dark:hover:bg-slate-800/60"
                   }`}
                 >
-                  <ShoppingBag className="w-3 h-3 text-rose-300" />
+                  <ShoppingBag className={`w-3.5 h-3.5 ${isRetail ? "text-rose-200" : "text-[#9B112B]"}`} />
                   <span>Retail</span>
                 </Link>
               </div>
-            </div>
 
-            {/* Center: Navigation Links (Desktop) */}
-            <nav className="hidden lg:flex items-center space-x-1">
-              {navLinks.map((link) => (
+              {/* Editorial Links: Réalisations & Contact */}
+              <div className="flex items-center space-x-1 pl-1">
                 <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`px-3 py-1.5 text-sm font-medium rounded-sm transition-colors relative ${
-                    link.active
+                  href="/realisations"
+                  className={`px-3 py-1.5 text-xs font-semibold rounded-full transition-colors ${
+                    pathname === "/realisations"
                       ? isOverDarkHero
-                        ? "text-white font-semibold"
-                        : "text-foreground font-semibold"
+                        ? "text-white bg-white/20 font-bold"
+                        : "text-foreground bg-slate-100 dark:bg-slate-800 font-bold"
                       : isOverDarkHero
                       ? "text-white/80 hover:text-white hover:bg-white/10"
                       : "text-muted-foreground hover:text-foreground hover:bg-slate-100 dark:hover:bg-slate-800"
                   }`}
                 >
-                  {link.label}
-                  {link.active && (
-                    <span
-                      className="absolute bottom-0 left-3 right-3 h-0.5 rounded-full"
-                      style={{ backgroundColor: activePoleColor }}
-                    />
-                  )}
+                  Réalisations
                 </Link>
-              ))}
+
+                <Link
+                  href="/contact"
+                  className={`px-3 py-1.5 text-xs font-semibold rounded-full transition-colors ${
+                    pathname === "/contact"
+                      ? isOverDarkHero
+                        ? "text-white bg-white/20 font-bold"
+                        : "text-foreground bg-slate-100 dark:bg-slate-800 font-bold"
+                      : isOverDarkHero
+                      ? "text-white/80 hover:text-white hover:bg-white/10"
+                      : "text-muted-foreground hover:text-foreground hover:bg-slate-100 dark:hover:bg-slate-800"
+                  }`}
+                >
+                  Contact
+                </Link>
+              </div>
             </nav>
 
             {/* Right: CTA Cluster */}
-            <div className="flex items-center gap-2.5">
+            <div className="flex items-center gap-2.5 shrink-0">
               {/* RDV Avant-Vente Button */}
               <Link
                 href="/rendez-vous"
                 className={`hidden sm:inline-flex items-center gap-2 px-3.5 py-2 text-xs font-medium rounded-sm border transition-all ${
                   isOverDarkHero
                     ? "bg-white/10 border-white/30 text-white hover:bg-white/20"
-                    : "bg-card border-border text-foreground hover:border-slate-400 hover:bg-slate-50 shadow-xs"
+                    : "bg-card border-border text-foreground hover:border-slate-400 hover:bg-slate-50 shadow-2xs"
                 }`}
               >
                 <Calendar className="w-3.5 h-3.5" />
@@ -194,7 +215,7 @@ export function Header() {
               {/* Mon Devis (N) Live Badge Button */}
               <Link
                 href="/demande-devis"
-                className={`relative inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold rounded-sm transition-all shadow-sm ${
+                className={`relative inline-flex items-center gap-2 px-3.5 py-2 text-xs font-semibold rounded-sm transition-all shadow-xs ${
                   isRetail
                     ? "bg-[#9B112B] hover:bg-[#7E0E23] text-white"
                     : isSolutions
@@ -244,48 +265,62 @@ export function Header() {
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
           <div className="lg:hidden bg-white dark:bg-slate-950 border-b border-border px-4 pt-3 pb-6 space-y-4 shadow-xl">
-            {/* Entity Switcher for Mobile */}
-            <div className="grid grid-cols-3 gap-1.5 p-1 bg-slate-100 dark:bg-slate-900 rounded border border-border text-xs font-medium">
+            {/* 4-Entity & Group Switcher for Mobile */}
+            <div className="grid grid-cols-4 gap-1 p-1 bg-slate-100 dark:bg-slate-900 rounded-lg border border-border text-[11px] font-medium text-center">
               <Link
-                href="/ingenierie"
-                className={`py-2 text-center rounded ${
-                  isIngenierie ? "bg-[#007A63] text-white font-semibold" : "text-muted-foreground"
+                href="/"
+                className={`py-2 px-1 rounded transition-colors ${
+                  isHome ? "bg-white dark:bg-slate-800 text-foreground font-bold shadow-2xs" : "text-muted-foreground"
                 }`}
               >
-                Ingénierie
+                Le groupe
+              </Link>
+              <Link
+                href="/energie"
+                className={`py-2 px-1 rounded transition-colors ${
+                  isEnergie ? "bg-[#007A63] text-white font-bold" : "text-muted-foreground"
+                }`}
+              >
+                Énergie
               </Link>
               <Link
                 href="/solutions"
-                className={`py-2 text-center rounded ${
-                  isSolutions ? "bg-[#22409A] text-white font-semibold" : "text-muted-foreground"
+                className={`py-2 px-1 rounded transition-colors ${
+                  isSolutions ? "bg-[#22409A] text-white font-bold" : "text-muted-foreground"
                 }`}
               >
                 Solutions
               </Link>
               <Link
                 href="/retail"
-                className={`py-2 text-center rounded ${
-                  isRetail ? "bg-[#9B112B] text-white font-semibold" : "text-muted-foreground"
+                className={`py-2 px-1 rounded transition-colors ${
+                  isRetail ? "bg-[#9B112B] text-white font-bold" : "text-muted-foreground"
                 }`}
               >
-                Retail B2B
+                Retail
               </Link>
             </div>
 
-            {/* Nav links */}
-            <div className="flex flex-col space-y-1 divide-y divide-border/40">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`pt-2.5 pb-2 text-sm font-medium flex items-center justify-between ${
-                    link.active ? "text-primary font-bold" : "text-foreground"
-                  }`}
-                >
-                  <span>{link.label}</span>
-                  <ArrowRight className="w-4 h-4 text-muted-foreground" />
-                </Link>
-              ))}
+            {/* Nav links (Réalisations, Contact) */}
+            <div className="flex flex-col space-y-1 divide-y divide-border/40 pt-1">
+              <Link
+                href="/realisations"
+                className={`pt-2.5 pb-2 text-sm font-medium flex items-center justify-between ${
+                  pathname === "/realisations" ? "text-primary font-bold" : "text-foreground"
+                }`}
+              >
+                <span>Réalisations</span>
+                <ArrowRight className="w-4 h-4 text-muted-foreground" />
+              </Link>
+              <Link
+                href="/contact"
+                className={`pt-2.5 pb-2 text-sm font-medium flex items-center justify-between ${
+                  pathname === "/contact" ? "text-primary font-bold" : "text-foreground"
+                }`}
+              >
+                <span>Contact</span>
+                <ArrowRight className="w-4 h-4 text-muted-foreground" />
+              </Link>
             </div>
 
             {/* Mobile CTAs */}

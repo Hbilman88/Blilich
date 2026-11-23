@@ -191,10 +191,10 @@ export function HomeHeroSection() {
         {/* Quick Entity Nav Pills */}
         <div ref={pillsRef} className="mt-12 flex flex-wrap items-center justify-center gap-3 text-xs font-mono">
           <Link
-            href="/ingenierie"
+            href="/energie"
             className="px-3 py-1 rounded bg-white/5 hover:bg-white/10 border border-emerald-500/30 text-emerald-300 transition-colors"
           >
-            01 · Ingénierie HT/BT & Postes
+            01 · MOCOMEL Énergie · Postes HT/BT
           </Link>
           <Link
             href="/solutions"

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Zap, ShieldCheck, ShoppingBag, ArrowRight } from "lucide-react";
@@ -24,9 +24,9 @@ interface EntityData {
 
 const ENTITY_ITEMS: EntityData[] = [
   {
-    id: "ingenierie",
+    id: "energie",
     badge: "01 · Pôle Mère",
-    title: "MOCOMEL Ingénierie",
+    title: "MOCOMEL Énergie",
     subtitle: "Études, Postes HTA/BT & Automatismes",
     desc: "Études d'exécution, réalisation et raccordement de postes de transformation 22 kV, armoires industrielles TGBT, automatisme et maintenance réseau accréditée ONEE.",
     bullets: [
@@ -35,8 +35,8 @@ const ENTITY_ITEMS: EntityData[] = [
       "Supervision SCADA & automates industriels",
     ],
     image: "/media/card-ingenierie.jpg",
-    href: "/ingenierie",
-    ctaText: "Explorer le Pôle Ingénierie",
+    href: "/energie",
+    ctaText: "Explorer le Pôle Énergie",
     color: "#007A63",
     softTint: "#ECFDF5",
   },
@@ -82,27 +82,54 @@ export function EntityCards() {
 
   useGSAP(
     () => {
-      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      // Respect prefers-reduced-motion
+      if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
         return;
       }
 
       gsap.registerPlugin(ScrollTrigger);
 
-      gsap.from(".entity-card-col", {
-        opacity: 0,
-        y: 40,
-        duration: 0.9,
-        stagger: 0.15,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 80%",
-          once: true,
-        },
-      });
+      // Safe reveal: starts at subtle 0.35 opacity and clears all inline styles on finish
+      const tween = gsap.fromTo(
+        ".entity-card-col",
+        { opacity: 0.35, y: 20 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "power2.out",
+          clearProps: "all",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 95%",
+            once: true,
+          },
+        }
+      );
+
+      // Refresh ScrollTrigger to sync with Lenis & media dimensions
+      ScrollTrigger.refresh();
+
+      return () => {
+        tween.kill();
+      };
     },
     { scope: containerRef }
   );
+
+  // Safety fallback: guaranteed 100% visibility regardless of scroll or network condition
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const cards = containerRef.current?.querySelectorAll<HTMLElement>(".entity-card-col");
+      cards?.forEach((card) => {
+        card.style.opacity = "1";
+        card.style.visibility = "visible";
+      });
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <section ref={containerRef} className="py-24 bg-slate-50 dark:bg-slate-950 relative overflow-hidden">
@@ -130,13 +157,14 @@ export function EntityCards() {
                 key={entity.id}
                 onMouseEnter={() => setActiveHoverId(entity.id)}
                 onMouseLeave={() => setActiveHoverId(null)}
-                className={`entity-card-col relative rounded-xl border border-border bg-card overflow-hidden flex flex-col justify-between transition-all duration-500 ease-out will-change-transform ${
+                className={`entity-card-col relative rounded-xl border border-border bg-card overflow-hidden flex flex-col justify-between transition-all duration-500 ease-out will-change-transform opacity-100 ${
                   hasHover
                     ? isHovered
                       ? "lg:flex-[1.3] shadow-2xl scale-[1.01]"
                       : "lg:flex-[0.85] opacity-80"
-                    : "lg:flex-1 shadow-sm"
+                    : "lg:flex-1 shadow-sm opacity-100"
                 }`}
+                style={{ opacity: 1 }}
               >
                 {/* Entity-Color Top Hairline Indicator */}
                 <div

@@ -200,7 +200,6 @@ export function generateQuotePDF(data: PDFQuoteData) {
   });
 
   // 4. SUMMARY BOX
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const lastTableY = (doc as any).lastAutoTable?.finalY || tableStartY + 40;
 
   const summaryY = lastTableY + 8;

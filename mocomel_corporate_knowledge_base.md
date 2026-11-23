@@ -46,10 +46,11 @@ Magasin 7, Immeuble 200, Lotissement Essalam, Tit Mellil, Casablanca, Maroc.
 
 Les fichiers logos suivants doivent être placés à la racine du dossier public du projet (`/public/logos/`) :
 
-### 1️⃣ MOCOMEL Ingénierie (Entité Mère \& Cœur Métier)
+### 1️⃣ MOCOMEL Énergie (Entité Mère & Cœur Métier)
 
+* **Nom Commercial :** MOCOMEL Énergie (Groupe MOCOMEL SARL)
 * **Fichier Logo :** `logo-mocomel.png`
-* **Périmètre :** Études, Postes HTA/BT, Ingénierie Électrique Industrielle, Automatismes, Tableaux \& Armoires Électriques, Maintenance Industrielle \& Réseaux.
+* **Périmètre :** Études, Postes HTA/BT, Ingénierie Électrique Industrielle, Automatismes, Tableaux & Armoires Électriques, Maintenance Industrielle & Réseaux.
 * **Couleurs de Marque :**
 
   * Primary Emerald: `#007A63`

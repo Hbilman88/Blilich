@@ -48,7 +48,7 @@ export default function ContactPage() {
               <Phone className="w-5 h-5" />
             </div>
             <div>
-              <p className="text-xs text-muted-foreground font-mono">Standard / Ingénierie</p>
+              <p className="text-xs text-muted-foreground font-mono">Standard / Pôle Énergie</p>
               <p className="text-base font-bold font-mono text-foreground group-hover:text-[#007A63] transition-colors">
                 {COMPANY_INFO.phoneStandard}
               </p>
